@@ -1,2 +1,3 @@
 # Calculate-average-grade
-Calculate the average grade for students in electrical and computer engineering at University of Patras
+
+Practical tool for calculating your average score in the Electrical and Computer Engineering Department at the University of Patras.
