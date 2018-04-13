@@ -7,10 +7,9 @@ float inpvath(void) ;
 float calcsynt(int ects);
 
 int main(int argc, char *argv[]) {
-	system("chcp 1253"); system("cls") ;
 	int ects;
 	float vathmos,synt,sumvath,sumsynt=0;
-	printf("\t\t\t\t\t\t ΥΠΟΛΟΓΙΣΜΟΣ ΜΟ ΗΜΤΥ\n") ;
+	printf("\t\t\t\t\tGPA calculation for the ECE@UoP\n") ;
 	for(;;){
         vathmos = inpvath() ;
         if (vathmos == 0) break ;
@@ -19,8 +18,8 @@ int main(int argc, char *argv[]) {
         sumvath += vathmos * synt;
         sumsynt += synt;
     }
-    if (sumsynt == 0) printf("\nΔεν πληκτρολόγησες κανένα βαθμό!\n\n") ;
-    else printf("\nΈχεις μέσο όρο: %.2f\n\n",sumvath/sumsynt);
+    if (sumsynt == 0) printf("\nYou didn't enter any course grade!\n\n") ;
+    else printf("\nYour GPA is: %.2f\n\n",sumvath/sumsynt);
 	system("pause") ;
 	return 0;
 }
@@ -28,7 +27,7 @@ int main(int argc, char *argv[]) {
 int inpects(void) {
     char *end, s[4096];
     int ects,i,flag = 0;
-    printf("\nΠαρακαλώ πληκτρολόγησε έναν ακέραιο θετικό αριθμό ects: ");
+    printf("\nPlease enter an integer positive ects grade: ");
     while (fgets(s, sizeof(s), stdin)){
         ects = strtol(s, &end, 10);
         for (i=0; i<strlen(s)-1; i++){
@@ -38,20 +37,20 @@ int inpects(void) {
 			}
 		}
 		if (flag == 1){
-			printf("Παρακαλώ πληκτρολόγησε τον αριθμό των ects χωρίς κάποιο χαρακτήρα: ") ;
+			printf("Please enter the ects grade without any character: ") ;
 			flag = 0 ;
 		}
 		else if (s[0] == '\n') {
-            printf("Παρακαλώ πληκτρολόγησε κάποιον θετικό αριθμό ects: ");
+            printf("Please enter a positive ects grade: ");
         }
         else if (strlen(end)-1 != 0 && ects<=0 ){
-        	printf("Παρακαλώ πληκτρολόγησε έναν ΑΚΕΡΑΙΟ ΘΕΤΙΚΟ αριθμό ects: ");
+        	printf("Please enter an INTEGER POSITIVE ects grade: ");
 		}
         else if (strlen(end)-1 !=0) {
-            printf("Παρακαλώ πληκτρολόγησε έναν ΑΚΕΡΑΙΟ θετικό αριθμό ects: ");
+            printf("Please enter an INTEGER positive ects grade: ");
         }
         else if (ects<=0) {
-        	printf("Παρακαλώ πληκτρολόγησε έναν ακέραιο ΘΕΤΙΚΟ αριθμό ects: ");
+        	printf("Please enter an integer POSITIVE ects grade: ");
 		}
 		else break;
     }
@@ -62,15 +61,15 @@ float inpvath(void) {
 	char s[4096],*cp;
 	float vath,pollaplasio;
 	int i;
-    printf("\nΠαρακαλώ πληκτρολόγησε έναν βαθμό >= 5 ή το 0 για τον τερματισμό του υπολογισμού: ");
+    printf("\nPlease enter a course grade >= 5 or enter 0 to terminate the computation: ");
     while(fgets(s,sizeof(s),stdin)){
     	vath = strtod(s, &cp);
     	pollaplasio = vath/0.5 ;
-    	if (s[0] == '\n') printf("Παρακαλώ πληκτρολόγησε έναν βαθμό >= 5 ή το 0 για τον τερματισμό του υπολογισμού: ");
+    	if (s[0] == '\n') printf("Please enter a course grade >= 5 or enter 0 to terminate the computation: ");
 		else if(strlen(cp)-1 == 0 && vath == 0) return vath;
-		else if (strlen(cp)-1!=0) printf("Παρακαλώ πληκτρολόγησε έναν έγκυρο αριθμό χωρίς χαρακτήρες - {.} ή το 0 για τον τερματισμό του υπολογισμού: ") ;
-		else if (vath<5 || vath>10) printf("Παρακαλώ πληκτρολόγησε έναν αριθμό στην κλίμακα [5-10]: ") ;
-		else if (pollaplasio - (int) pollaplasio != 0) printf("Παρακαλώ ο βαθμός να είναι ακέραιο πολλαπλάσιο του 0.5: ") ;
+		else if (strlen(cp)-1!=0) printf("Please enter a valid course grade without characters - {.} or enter 0 to terminate the computation:  ") ;
+		else if (vath<5 || vath>10) printf("Please enter a course grade in the closed interval [5-10]: ") ;
+		else if (pollaplasio - (int) pollaplasio != 0) printf("The course grade must be an integer multiple of 0.5: ") ;
 		else break;
 	}
     return vath ;
